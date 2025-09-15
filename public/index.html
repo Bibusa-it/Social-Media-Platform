@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialConnect - Modern Social Media Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>SocialConnect</h2>
+            <p>Connecting people, sharing moments</p>
+        </div>
+    </div>
+
+    <!-- Auth Container -->
+    <div id="auth-container" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-header">
+                <h1><i class="fas fa-users"></i> SocialConnect</h1>
+                <p>Join the community and share your moments</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <h2>Welcome Back</h2>
+                <div class="form-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="login-username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <p class="auth-switch">Don't have an account? <a href="#" id="show-register">Sign up</a></p>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form hidden">
+                <h2>Create Account</h2>
+                <div class="form-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="register-username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="register-email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-id-card"></i>
+                    <input type="text" id="register-fullname" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="register-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+                <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app-container" class="app-container hidden">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-left">
+                <h1 class="nav-logo"><i class="fas fa-users"></i> SocialConnect</h1>
+            </div>
+            <div class="nav-center">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search users...">
+                    <div id="search-results" class="search-results hidden"></div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button id="create-post-btn" class="btn-primary">
+                    <i class="fas fa-plus"></i> New Post
+                </button>
+                <div class="user-menu">
+                    <img id="nav-profile-pic" src="https://via.placeholder.com/40" alt="Profile" class="profile-pic">
+                    <div class="dropdown-menu">
+                        <a href="#" id="profile-link"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#" id="settings-link"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3>Quick Actions</h3>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" id="home-link" class="active"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#" id="profile-sidebar-link"><i class="fas fa-user"></i> My Profile</a></li>
+                        <li><a href="#" id="explore-link"><i class="fas fa-compass"></i> Explore</a></li>
+                        <li><a href="#" id="notifications-link"><i class="fas fa-bell"></i> Notifications</a></li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Trending Topics</h3>
+                    <div class="trending-topics">
+                        <div class="topic">#Technology</div>
+                        <div class="topic">#Programming</div>
+                        <div class="topic">#WebDev</div>
+                        <div class="topic">#Innovation</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Feed -->
+            <section class="feed">
+                <!-- Create Post Modal -->
+                <div id="create-post-modal" class="modal hidden">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Create New Post</h3>
+                            <button id="close-modal" class="close-btn">&times;</button>
+                        </div>
+                        <form id="post-form">
+                            <div class="form-group">
+                                <textarea id="post-content" placeholder="What's on your mind?" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="post-image" class="file-upload">
+                                    <i class="fas fa-image"></i> Add Image
+                                </label>
+                                <input type="file" id="post-image" accept="image/*" hidden>
+                                <div id="image-preview" class="image-preview hidden"></div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" id="cancel-post" class="btn-secondary">Cancel</button>
+                                <button type="submit" class="btn-primary">Post</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Posts Container -->
+                <div id="posts-container" class="posts-container">
+                    <!-- Posts will be dynamically loaded here -->
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container">
+                    <button id="load-more-btn" class="btn-secondary hidden">Load More Posts</button>
+                </div>
+            </section>
+
+            <!-- Right Sidebar -->
+            <aside class="right-sidebar">
+                <!-- User Profile Card -->
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <img id="main-profile-pic" src="https://via.placeholder.com/80" alt="Profile" class="profile-pic-large">
+                        <h3 id="main-username">Username</h3>
+                        <p id="main-bio">Bio will appear here</p>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <span id="posts-count">0</span>
+                            <label>Posts</label>
+                        </div>
+                        <div class="stat">
+                            <span id="followers-count">0</span>
+                            <label>Followers</label>
+                        </div>
+                        <div class="stat">
+                            <span id="following-count">0</span>
+                            <label>Following</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suggested Users -->
+                <div class="suggested-users">
+                    <h3>Suggested Users</h3>
+                    <div id="suggested-users-list">
+                        <!-- Suggested users will be loaded here -->
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal hidden">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>User Profile</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="profile-modal-content">
+                <div class="profile-header-large">
+                    <img id="modal-profile-pic" src="https://via.placeholder.com/120" alt="Profile" class="profile-pic-xl">
+                    <div class="profile-info">
+                        <h2 id="modal-username">Username</h2>
+                        <p id="modal-bio">Bio will appear here</p>
+                        <div class="profile-stats-large">
+                            <div class="stat">
+                                <span id="modal-posts-count">0</span>
+                                <label>Posts</label>
+                            </div>
+                            <div class="stat">
+                                <span id="modal-followers-count">0</span>
+                                <label>Followers</label>
+                            </div>
+                            <div class="stat">
+                                <span id="modal-following-count">0</span>
+                                <label>Following</label>
+                            </div>
+                        </div>
+                        <button id="follow-btn" class="btn-primary">Follow</button>
+                    </div>
+                </div>
+                <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="posts">Posts</button>
+                    <button class="tab-btn" data-tab="followers">Followers</button>
+                    <button class="tab-btn" data-tab="following">Following</button>
+                </div>
+                <div class="tab-content">
+                    <div id="profile-posts" class="tab-pane active">
+                        <!-- User posts will be loaded here -->
+                    </div>
+                    <div id="profile-followers" class="tab-pane">
+                        <!-- Followers list will be loaded here -->
+                    </div>
+                    <div id="profile-following" class="tab-pane">
+                        <!-- Following list will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Profile Settings</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <form id="settings-form">
+                <div class="form-group">
+                    <label for="settings-profile-pic">Profile Picture</label>
+                    <input type="file" id="settings-profile-pic" accept="image/*" aria-describedby="current-profile-pic">
+                    <img id="current-profile-pic" src="https://via.placeholder.com/60" alt="Current Profile" class="profile-pic-small">
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="settings-fullname" placeholder="Full Name">
+                </div>
+                <div class="form-group">
+                    <label>Bio</label>
+                    <textarea id="settings-bio" placeholder="Tell us about yourself"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+            <div class="danger-zone">
+                <h4>Danger Zone</h4>
+                <p>These actions cannot be undone.</p>
+                <button type="button" id="delete-account-btn" class="btn-danger" aria-label="Delete Account">Delete Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
