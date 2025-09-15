@@ -240,9 +240,6 @@ This project demonstrates full-stack development skills and can be extended with
 - Performance optimizations
 - UI/UX improvements
 
-## 📄 License
-
-This project is created for educational and portfolio purposes.
 
 ## 👨‍💻 Developer Notes
 
@@ -260,5 +257,3 @@ Perfect for demonstrating web development skills in portfolios and interviews!
 
 
 
-# Social-Media-Platform
-# Social-Media-Platform
